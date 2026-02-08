@@ -29,7 +29,10 @@ wikimedia-kafka-parent
 │
 └── pom.xml
 
+---
+
 ## Tech Stack
+```text
 - Java
 - Spring Boot
 - Apache Kafka (KRaft Mode)
@@ -44,6 +47,7 @@ wikimedia-kafka-parent
 ---
 
 ## Prerequisites
+```text
 - Java 8 or higher
 - Maven
 - Apache Kafka 3.x or higher (KRaft enabled)
@@ -52,27 +56,31 @@ wikimedia-kafka-parent
 ---
 
 ## Kafka Setup (KRaft Mode)
+```text
 
 kafka-storage.sh random-uuid
 kafka-storage.sh format -t <UUID> -c config/kraft/server.properties
 kafka-server-start.sh config/kraft/server.properties
-
+---
 ## Running the Application
+```text
 
 ### Start Kafka Producer
 
 cd wikimedia-producer
 mvn spring-boot:run
 
-### Start Kafka Consumer
+## Start Kafka Consumer
 
 cd wikimedia-consumer
 mvn spring-boot:run
-
-Data Flow
+---
+##Data Flow
+```text
 Wikimedia API → Kafka Producer → Kafka Topic → Kafka Consumer → Database
-
-### Key Features
+-----
+## Key Features
+```text
 
 Kafka KRaft mode (no Zookeeper dependency)
 
@@ -83,16 +91,17 @@ Producer–Consumer architecture
 Database persistence using Spring Data JPA
 
 Clean multi-module Maven structure
-
-### Future Enhancements
-
+----
+## Future Enhancements
+```text
 Kafka Streams for real-time analytics
 
 Docker & Docker Compose support
 
 Monitoring using Prometheus and Grafana
-
+---
 ##Author
+```text
 Pravalika Reddy Muthannagari
 Java / Backend Developer
 
