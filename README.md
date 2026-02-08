@@ -1,4 +1,5 @@
 Wikimedia Kafka Parent – Multi-Module Project (KRaft Mode)
+
 📌 Project Overview
 
 This project is a real-time event streaming application built using Apache Kafka (KRaft mode) and Spring Boot.
@@ -58,12 +59,17 @@ MySQL / PostgreSQL / H2 (any JPA-supported DB)
 
 🛠️ Kafka Setup (KRaft Mode)
 1️⃣ Generate Cluster UUID
+
 kafka-storage.sh random-uuid
+
 2️⃣ Format Kafka Storage
+
 kafka-storage.sh format \
 -t <UUID> \
 -c config/kraft/server.properties
+
 3️⃣ Start Kafka Broker
+
 kafka-server-start.sh config/kraft/server.properties
 
 📌 Kafka Topic
