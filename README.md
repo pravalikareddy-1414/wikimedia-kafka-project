@@ -1,16 +1,22 @@
-Wikimedia Kafka Parent – Multi-Module Project (KRaft Mode)
+# Wikimedia Kafka Streaming Application (KRaft)
 
-📌 Project Overview
+A real-time event streaming application built using **Apache Kafka (KRaft mode)** and **Spring Boot**.  
+The application streams live Wikimedia Recent Change events, publishes them to Kafka, and persists the consumed data using **Spring Data JPA**.
 
-This project is a real-time event streaming application built using Apache Kafka (KRaft mode) and Spring Boot.
+---
 
-It consumes live Wikimedia Recent Change events, publishes them to a Kafka topic using a Kafka Producer, and stores the consumed events in a relational database using Spring Data JPA.
+## Overview
+- Streams live Wikimedia Recent Change events from Wikimedia EventStream API
+- Kafka Producer publishes events to a Kafka topic
+- Kafka Consumer consumes events and stores them in a relational database
+- Multi-module Maven project
+- Runs on Apache Kafka **KRaft mode (no Zookeeper)**
 
-The project is structured as a multi-module Maven application with separate Producer and Consumer services.
+---
 
-🧱 Project Structure
+## Project Structure
+```text
 wikimedia-kafka-parent
-│
 ├── wikimedia-producer
 │   ├── WikimediaChangesProducer
 │   ├── WikimediaChangesHandler
@@ -21,142 +27,74 @@ wikimedia-kafka-parent
 │   ├── WikimediaData (JPA Entity)
 │   └── WikimediaDataRepository
 │
-└── pom.xml (Parent Maven POM)
+└── pom.xml
 
-🚀 Technologies Used
+## Tech Stack
+- Java
+- Spring Boot
+- Apache Kafka (KRaft Mode)
+- Spring Kafka
+- Spring Data JPA (Hibernate)
+- Maven (Multi-Module Project)
+- Wikimedia EventStream API
+- OkHttp EventSource
+- Jackson
+- SLF4J / Logback
 
-Java
+---
 
-Spring Boot
+## Prerequisites
+- Java 8 or higher
+- Maven
+- Apache Kafka 3.x or higher (KRaft enabled)
+- MySQL / PostgreSQL / H2 (any JPA-supported database)
 
-Apache Kafka (KRaft – No Zookeeper)
+---
 
-Spring Kafka
-
-Spring Data JPA
-
-Hibernate
-
-Maven (Multi-Module)
-
-Wikimedia EventStream API
-
-OkHttp EventSource
-
-Jackson
-
-SLF4J / Logback
-
-⚙️ Prerequisites
-
-Java 8+
-
-Apache Kafka 3.x+ (KRaft mode)
-
-Maven
-
-MySQL / PostgreSQL / H2 (any JPA-supported DB)
-
-🛠️ Kafka Setup (KRaft Mode)
-1️⃣ Generate Cluster UUID
+## Kafka Setup (KRaft Mode)
 
 kafka-storage.sh random-uuid
-
-2️⃣ Format Kafka Storage
-
-kafka-storage.sh format \
--t <UUID> \
--c config/kraft/server.properties
-
-3️⃣ Start Kafka Broker
-
+kafka-storage.sh format -t <UUID> -c config/kraft/server.properties
 kafka-server-start.sh config/kraft/server.properties
 
-📌 Kafka Topic
+## Running the Application
 
-The topic is auto-created using Spring Kafka:
+### Start Kafka Producer
 
-TopicBuilder.name("wikimedia_recentchange").build();
-
-▶️ Running the Applications
-Run Producer Service
 cd wikimedia-producer
 mvn spring-boot:run
 
+### Start Kafka Consumer
 
-Producer Responsibilities
-
-Connects to Wikimedia EventStream API
-
-Reads real-time change events
-
-Publishes messages to Kafka topic wikimedia_recentchange
-
-Run Consumer Service
 cd wikimedia-consumer
 mvn spring-boot:run
 
+Data Flow
+Wikimedia API → Kafka Producer → Kafka Topic → Kafka Consumer → Database
 
-Consumer Responsibilities
+### Key Features
 
-Listens to Kafka topic
-
-Consumes Wikimedia events
-
-Persists event data into database using JPA
-
-🗄️ Database Model
-@Entity
-@Table(name = "wikimedia_recentChange")
-public class WikimediaData {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Lob
-    private String wikiEventData;
-}
-
-🔄 Data Flow
-
-Producer connects to Wikimedia EventStream
-
-Streams real-time events
-
-Sends events to Kafka topic
-
-Consumer reads Kafka messages
-
-Consumer stores events in database
-
-✨ Key Features
-
-Kafka KRaft mode (no Zookeeper)
+Kafka KRaft mode (no Zookeeper dependency)
 
 Real-time event streaming
 
-Kafka producer & consumer
+Producer–Consumer architecture
 
-Database persistence using JPA
+Database persistence using Spring Data JPA
 
-Multi-module Maven architecture
+Clean multi-module Maven structure
 
-Clean separation of concerns
+### Future Enhancements
 
-🧪 Future Enhancements
+Kafka Streams for real-time analytics
 
-Add Kafka Streams for analytics
+Docker & Docker Compose support
 
-Implement batch processing
+Monitoring using Prometheus and Grafana
 
-Dockerize Kafka & services
-
-Add monitoring with Prometheus & Grafana
-
-👩‍💻 Author
-
+##Author
 Pravalika Reddy Muthannagari
 Java / Backend Developer
+
 
 
